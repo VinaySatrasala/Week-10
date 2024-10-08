@@ -1,6 +1,3 @@
-Here’s a clean and formatted **README** code that you can directly paste into your project's README file. It covers deployment on AWS, building the React app, and TypeScript examples.
-
-```markdown
 # React App Deployment and TypeScript Usage with AWS
 
 ## Table of Contents
