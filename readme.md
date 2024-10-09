@@ -11,12 +11,14 @@
    - Adding Properties from an Interface
    - Using `Pick`
    - Using `Partial`
+   - Readonly Properties
+   - Dynamic Object Properties
 5. [Local Development Setup](#local-development-setup)
 
 ---
 
 ## Overview
-This project demonstrates how to deploy a React application on AWS using **S3** and **CloudFront** for efficient content delivery. It also covers essential **TypeScript** APIs for working with objects and utility types like `Pick` and `Partial`.
+This project demonstrates how to deploy a React application on AWS using **S3** and **CloudFront** for efficient content delivery. It also covers essential **TypeScript** APIs for working with objects and utility types like `Pick`, `Partial`, and `Readonly`.
 
 ---
 
@@ -122,6 +124,74 @@ let user: UserInfo = {
 };
 ```
 
+### Task 4: Readonly Properties
+Use `Readonly` when you want object properties to be immutable after creation.
+
+```typescript
+interface Config {
+    endpoint: string;
+    apiKey: string;
+}
+
+const config: Readonly<Config> = {
+    endpoint: "https://api.example.com",
+    apiKey: "abc123"
+};
+
+// config.endpoint = "new-endpoint"; // Error: Cannot assign to 'endpoint' because it is a read-only property.
+```
+
+### Task 5: Dynamic Object Properties
+You can use an index signature in TypeScript to define dynamic properties.
+
+```typescript
+type User = {
+    name: string;
+    age: number;
+};
+
+type Users = {
+    [key: string]: User;
+};
+
+const users: Users = {
+    "User1": { name: "Vinay", age: 20 },
+    "User2": { name: "Raji", age: 20 }
+};
+```
+
+### Task 6: Using `Record`
+`Record` creates an object type with specific keys and their corresponding types.
+
+```typescript
+type UserRecord = Record<string, number>;
+
+const userScores: UserRecord = {
+    "Vinay": 90,
+    "Raji": 85
+};
+```
+
+### Task 7: Using `Map`
+Maps are useful when you need to maintain key-value pairs with specific methods to interact with them.
+
+```typescript
+const users = new Map<string, number>();
+users.set("Vinay", 10);
+users.set("Raji", 20);
+
+console.log(users.get("Vinay")); // Output: 10
+```
+
+### Task 8: Exclude Types
+`Exclude` helps to create a type by excluding specific values from a union.
+
+```typescript
+type EventType = 'click' | 'scroll' | 'mousemove';
+
+type RefinedEvent = Exclude<EventType, 'scroll'>; // 'click' | 'mousemove'
+```
+
 ---
 
 ## Local Development Setup
@@ -157,10 +227,4 @@ To run your React application locally, follow these steps:
 This will serve the app from the `dist` folder and make it available at `http://localhost:5000`.
 
 ---
-
-## Conclusion
-
-This README covers the essential steps to deploy a React app on AWS, including using S3 and CloudFront for distribution, building and running the app locally, and working with TypeScript interfaces and utility types.
 ```
-
-You can copy and paste this into your README file. It’s structured, easy to follow, and provides all necessary details about deployment and TypeScript examples.
